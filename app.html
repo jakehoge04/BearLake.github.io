@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Boat & Water Sports Quiz</title>
+  <style>
+    /* ====== DESIGN SYSTEM ====== */
+    :root {
+      --ocean-deep: #0a2744;
+      --ocean-mid:  #0d4f8b;
+      --ocean-surf: #1a8cc4;
+      --wave:       #4fc3f7;
+      --sand:       #f4e4b4;
+      --gold:       #c8a951;
+      --white:      #ffffff;
+      --success:    #2ecc71;
+      --error:      #e74c3c;
+      --text-light: rgba(255,255,255,0.88);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--ocean-deep);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    /* ====== ANIMATED WAVE BACKGROUND ====== */
+    body::before, body::after {
+      content: '';
+      position: fixed;
+      left: -50%;
+      width: 200%;
+      border-radius: 43%;
+      animation: wave-spin linear infinite;
+      z-index: 0;
+      pointer-events: none;
+    }
+    body::before {
+      height: 260px;
+      bottom: -100px;
+      background: rgba(79, 195, 247, 0.10);
+      animation-duration: 14s;
+    }
+    body::after {
+      height: 240px;
+      bottom: -120px;
+      background: rgba(26, 140, 196, 0.07);
+      animation-duration: 18s;
+      animation-direction: reverse;
+    }
+    @keyframes wave-spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    /* ====== NAV BAR ====== */
+    #quiz-nav {
+      width: 100%;
+      background: rgba(10,39,68,0.95);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 10;
+      border-bottom: 1px solid rgba(200,169,81,0.25);
+    }
+    #quiz-nav a {
+      color: var(--sand);
+      font-family: Arial, sans-serif;
+      font-size: 0.82rem;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+    }
+    #quiz-nav a:hover { color: #fff; }
+    #quiz-nav .brand {
+      font-family: 'Georgia', serif;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+
+    /* ====== MAIN CONTAINER ====== */
+    #app {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 740px;
+      padding: 32px 16px 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ====== SCREEN PANELS ====== */
+    .screen {
+      width: 100%;
+      display: none;
+      animation: fade-up 0.4s ease both;
+    }
+    .screen.active { display: block; }
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ====== CARD ====== */
+    .card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 40px;
+      backdrop-filter: blur(8px);
+      color: var(--white);
+    }
+
+    /* ====== WELCOME SCREEN ====== */
+    #welcome-screen .title {
+      font-size: 2.8rem;
+      color: var(--white);
+      text-align: center;
+      line-height: 1.2;
+      margin-bottom: 8px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+    }
+    #welcome-screen .boat-icon {
+      font-size: 4rem;
+      text-align: center;
+      display: block;
+      margin-bottom: 16px;
+      animation: bob 2.5s ease-in-out infinite;
+    }
+    @keyframes bob {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
+    }
+    #welcome-screen .subtitle {
+      text-align: center;
+      color: var(--sand);
+      font-family: Arial, sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    #welcome-screen .desc {
+      color: var(--text-light);
+      line-height: 1.8;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .quiz-info {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .info-box {
+      background: rgba(255,255,255,0.07);
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .info-box .num {
+      font-size: 1.8rem;
+      color: var(--gold);
+      font-weight: 700;
+      display: block;
+    }
+    .info-box .label {
+      font-family: Arial, sans-serif;
+      font-size: 0.78rem;
+      color: var(--text-light);
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+
+    /* ====== BUTTONS ====== */
+    .btn-start {
+      display: block;
+      width: 100%;
+      background: linear-gradient(135deg, var(--gold), #a88a3a);
+      color: var(--ocean-deep);
+      font-family: Arial, sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      letter-spacing: 1px;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 20px rgba(200,169,81,0.35);
+    }
+    .btn-start:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(200,169,81,0.45);
+    }
+
+    /* ====== PROGRESS BAR ====== */
+    #progress-bar-wrap {
+      width: 100%;
+      background: rgba(255,255,255,0.1);
+      border-radius: 8px;
+      height: 8px;
+      margin-bottom: 28px;
+      overflow: hidden;
+    }
+    #progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--wave), var(--gold));
+      border-radius: 8px;
+      transition: width 0.4s ease;
+    }
+
+    #question-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    #q-counter {
+      font-family: Arial, sans-serif;
+      font-size: 0.82rem;
+      color: var(--sand);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    #q-category {
+      font-family: Arial, sans-serif;
+      font-size: 0.78rem;
+      background: rgba(79,195,247,0.18);
+      color: var(--wave);
+      border: 1px solid rgba(79,195,247,0.3);
+      border-radius: 20px;
+      padding: 3px 12px;
+      letter-spacing: 0.5px;
+    }
+
+    /* ====== TIMER ====== */
+    #timer-ring-wrap {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 16px;
+    }
+    #timer-svg {
+      width: 52px; height: 52px;
+      transform: rotate(-90deg);
+    }
+    #timer-track {
+      fill: none;
+      stroke: rgba(255,255,255,0.1);
+      stroke-width: 4;
+    }
+    #timer-arc {
+      fill: none;
+      stroke: var(--wave);
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-dasharray: 132;
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset 1s linear, stroke 0.3s;
+    }
+    #timer-text {
+      font-family: Arial, sans-serif;
+      font-size: 0.92rem;
+      font-weight: 700;
+      fill: var(--white);
+      text-anchor: middle;
+      dominant-baseline: central;
+      transform: rotate(90deg);
+      transform-origin: 26px 26px;
+    }
+
+    /* ====== QUESTION TEXT ====== */
+    #question-text {
+      font-size: 1.22rem;
+      color: var(--white);
+      line-height: 1.65;
+      margin-bottom: 28px;
+      min-height: 70px;
+    }
+
+    /* ====== ANSWER OPTIONS ====== */
+    #options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .option-btn {
+      background: rgba(255,255,255,0.07);
+      border: 1.5px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+      padding: 16px 14px;
+      color: var(--white);
+      font-family: Arial, sans-serif;
+      font-size: 0.95rem;
+      text-align: left;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, transform 0.1s;
+      line-height: 1.4;
+    }
+    .option-btn:hover:not(:disabled) {
+      background: rgba(79,195,247,0.15);
+      border-color: rgba(79,195,247,0.5);
+      transform: scale(1.01);
+    }
+    .option-btn.correct {
+      background: rgba(46,204,113,0.20);
+      border-color: var(--success);
+      color: #fff;
+    }
+    .option-btn.wrong {
+      background: rgba(231,76,60,0.18);
+      border-color: var(--error);
+      color: #fff;
+    }
+    .option-btn:disabled { cursor: default; }
+
+    /* ====== FEEDBACK BANNER ====== */
+    #feedback-banner {
+      display: none;
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-family: Arial, sans-serif;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+    #feedback-banner.show { display: block; }
+    #feedback-banner.correct-fb {
+      background: rgba(46,204,113,0.15);
+      border: 1px solid rgba(46,204,113,0.4);
+      color: #a8f5c8;
+    }
+    #feedback-banner.wrong-fb {
+      background: rgba(231,76,60,0.14);
+      border: 1px solid rgba(231,76,60,0.35);
+      color: #f9b4ac;
+    }
+
+    /* ====== NEXT BUTTON ====== */
+    #next-btn {
+      display: none;
+      width: 100%;
+      background: var(--ocean-mid);
+      color: var(--white);
+      font-family: Arial, sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      transition: background 0.2s;
+    }
+    #next-btn.visible { display: block; }
+    #next-btn:hover { background: var(--ocean-surf); }
+
+    /* ====== RESULTS SCREEN ====== */
+    #results-screen .score-circle {
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      background: conic-gradient(var(--gold) var(--pct, 0%), rgba(255,255,255,0.1) 0%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+      position: relative;
+    }
+    #results-screen .score-circle::before {
+      content: '';
+      position: absolute;
+      inset: 14px;
+      border-radius: 50%;
+      background: var(--ocean-deep);
+    }
+    #results-screen .score-circle .score-num {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+    #results-screen .score-circle .score-num span {
+      display: block;
+      font-size: 2.6rem;
+      color: var(--white);
+      line-height: 1;
+    }
+    #results-screen .score-circle .score-num small {
+      font-family: Arial, sans-serif;
+      font-size: 0.78rem;
+      color: var(--sand);
+      letter-spacing: 1px;
+    }
+    #results-screen h2 {
+      font-size: 2rem;
+      text-align: center;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    #results-screen .grade-msg {
+      text-align: center;
+      color: var(--sand);
+      font-family: Arial, sans-serif;
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    #answer-summary {
+      margin: 24px 0;
+    }
+    .summary-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      font-family: Arial, sans-serif;
+      font-size: 0.88rem;
+    }
+    .summary-row .dot {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-top: 1px;
+    }
+    .dot.ok  { background: var(--success); }
+    .dot.no  { background: var(--error); }
+    .summary-row .q-text { color: var(--text-light); flex: 1; line-height: 1.4; }
+    .summary-row .a-text { color: var(--sand); font-size: 0.8rem; margin-top: 2px; }
+
+    .btn-retry {
+      display: block;
+      width: 100%;
+      background: linear-gradient(135deg, var(--gold), #a88a3a);
+      color: var(--ocean-deep);
+      font-family: Arial, sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 20px;
+      letter-spacing: 0.5px;
+      transition: transform 0.15s;
+    }
+    .btn-retry:hover { transform: translateY(-2px); }
+    .btn-home {
+      display: block;
+      width: 100%;
+      background: transparent;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      color: var(--text-light);
+      font-family: Arial, sans-serif;
+      font-size: 0.9rem;
+      padding: 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 10px;
+      text-decoration: none;
+      text-align: center;
+      transition: border-color 0.2s;
+    }
+    .btn-home:hover { border-color: rgba(255,255,255,0.45); color: #fff; }
+
+    /* ====== SCORE TICKER ====== */
+    #score-display {
+      font-family: Arial, sans-serif;
+      font-size: 0.82rem;
+      color: var(--sand);
+    }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 500px) {
+      .card { padding: 24px 18px; }
+      #options-grid { grid-template-columns: 1fr; }
+      #welcome-screen .title { font-size: 2rem; }
+      .quiz-info { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="quiz-nav">
+  <a href="scratch.html">&#8592; Back to Boating Page</a>
+  <span class="brand">&#128676; Water Sports Quiz</span>
+  <a href="index.html">Portfolio</a>
+</nav>
+
+<div id="app">
+
+  <!-- ============================================
+       WELCOME SCREEN
+       ============================================ -->
+  <div id="welcome-screen" class="screen active">
+    <div class="card">
+      <span class="boat-icon">&#127946;</span>
+      <div class="title">Boat &amp; Water Sports Quiz</div>
+      <div class="subtitle">Test Your Lake Life Knowledge</div>
+      <p class="desc">
+        12 questions spanning boating safety, wake surfing technique, gear knowledge, 
+        and water sports trivia. Are you a weekend warrior — or a true lake legend?
+      </p>
+      <div class="quiz-info">
+        <div class="info-box">
+          <span class="num">12</span>
+          <div class="label">Questions</div>
+        </div>
+        <div class="info-box">
+          <span class="num">15s</span>
+          <div class="label">Per Question</div>
+        </div>
+        <div class="info-box">
+          <span class="num">4</span>
+          <div class="label">Categories</div>
+        </div>
+      </div>
+      <button class="btn-start" onclick="startQuiz()">Start the Quiz &#9658;</button>
+    </div>
+  </div>
+
+  <!-- ============================================
+       QUESTION SCREEN
+       ============================================ -->
+  <div id="question-screen" class="screen">
+
+    <!-- Progress -->
+    <div id="progress-bar-wrap">
+      <div id="progress-bar" style="width:0%"></div>
+    </div>
+
+    <div class="card">
+      <div id="question-meta">
+        <div id="q-counter">Question 1 of 12</div>
+        <div id="q-category">Safety</div>
+      </div>
+
+      <!-- Timer ring -->
+      <div id="timer-ring-wrap">
+        <svg id="timer-svg" viewBox="0 0 52 52">
+          <circle id="timer-track" cx="26" cy="26" r="21" />
+          <circle id="timer-arc"   cx="26" cy="26" r="21" />
+          <text id="timer-text" x="26" y="26">15</text>
+        </svg>
+      </div>
+
+      <div id="question-text">Loading question...</div>
+
+      <div id="options-grid">
+        <button class="option-btn" onclick="selectAnswer(0)"></button>
+        <button class="option-btn" onclick="selectAnswer(1)"></button>
+        <button class="option-btn" onclick="selectAnswer(2)"></button>
+        <button class="option-btn" onclick="selectAnswer(3)"></button>
+      </div>
+
+      <div id="feedback-banner"></div>
+      <button id="next-btn" onclick="nextQuestion()">Next Question &#8594;</button>
+
+    </div>
+
+    <!-- Score strip -->
+    <div style="text-align:center; margin-top:14px;">
+      <span id="score-display">Score: 0 / 0</span>
+    </div>
+  </div>
+
+  <!-- ============================================
+       RESULTS SCREEN
+       ============================================ -->
+  <div id="results-screen" class="screen">
+    <div class="card">
+      <div class="score-circle" id="score-circle">
+        <div class="score-num">
+          <span id="final-score-num">0</span>
+          <small>CORRECT</small>
+        </div>
+      </div>
+      <h2 id="result-title">Results</h2>
+      <p class="grade-msg" id="grade-msg"></p>
+
+      <div id="answer-summary"></div>
+
+      <button class="btn-retry" onclick="startQuiz()">&#8635; Try Again</button>
+      <a href="scratch.html" class="btn-home">&#128676; Back to Boating Page</a>
+    </div>
+  </div>
+
+</div><!-- end #app -->
+
+<script>
+  /* ================================================
+     QUIZ DATA — 12 questions across 4 categories
+     ================================================ */
+  const questions = [
+    {
+      category: "Safety",
+      q: "What does PFD stand for in boating safety?",
+      opts: ["Personal Flotation Device", "Power Fuel Dispenser", "Port Forward Deck", "Propeller Force Direction"],
+      ans: 0,
+      fact: "PFDs are legally required for all passengers. Type III vests are most common for water sports."
+    },
+    {
+      category: "Navigation",
+      q: "Which side of a boat is the 'starboard' side?",
+      opts: ["Left", "Right", "Bow (Front)", "Stern (Back)"],
+      ans: 1,
+      fact: "Starboard = right when facing forward. Port = left. A helpful trick: 'port' and 'left' both have 4 letters."
+    },
+    {
+      category: "Safety",
+      q: "What color is the starboard (right) navigation light on a boat?",
+      opts: ["Red", "White", "Green", "Yellow"],
+      ans: 2,
+      fact: "Starboard lights are green, port lights are red. White lights appear at the stern and masthead."
+    },
+    {
+      category: "Wake Surfing",
+      q: "What is ballast used for in a wake surf boat?",
+      opts: ["Improve fuel efficiency", "Sink the bow for speed", "Add weight to create a larger wave", "Cool the engine"],
+      ans: 2,
+      fact: "Ballast bags or tanks fill with water to add weight to one side of the boat, shaping a larger, more surfable wave."
+    },
+    {
+      category: "Wake Surfing",
+      q: "Approximately what speed do wake surf boats typically travel?",
+      opts: ["5–7 mph", "10–12 mph", "22–28 mph", "35–40 mph"],
+      ans: 1,
+      fact: "10–12 mph is the sweet spot for most wake surfers. Too fast and the wave steepens; too slow and it flattens."
+    },
+    {
+      category: "Water Sports",
+      q: "In wakeboarding, what is an 'invert'?",
+      opts: ["Riding switch (backwards)", "A trick where the rider goes upside-down", "A type of binding release", "Jumping off the back of the wave"],
+      ans: 1,
+      fact: "Inverts are aerial tricks where the rider's head goes below their feet — some of the most spectacular moves in the sport."
+    },
+    {
+      category: "Safety",
+      q: "What is the required minimum number of PFDs needed on a boat for recreational use?",
+      opts: ["One for the driver only", "One for each passenger onboard", "Two total per vessel", "Only recommended, not required"],
+      ans: 1,
+      fact: "U.S. Coast Guard regulations require at least one USCG-approved PFD for every person aboard."
+    },
+    {
+      category: "Navigation",
+      q: "What does it mean when a boat is 'running aground'?",
+      opts: ["Traveling at top speed", "The hull touches the lake or river bottom", "Anchoring in deep water", "Operating with the engine off"],
+      ans: 1,
+      fact: "Running aground means the hull has made contact with the bottom. Always check depth charts for unfamiliar water."
+    },
+    {
+      category: "Water Sports",
+      q: "What type of hull creates the most pronounced wake for surfing?",
+      opts: ["V-hull", "Flat-bottom hull", "Tunnel hull", "Displacement hull (surf-specific)"],
+      ans: 3,
+      fact: "Modern surf boats use displacement hulls with integrated ballast systems designed specifically to create large, clean surf waves."
+    },
+    {
+      category: "Wake Surfing",
+      q: "When wake surfing without a rope, what keeps the rider on the wave?",
+      opts: ["Gravity alone", "A magnetic attachment to the boat", "The hydrodynamic push of the wave face", "A hidden tether"],
+      ans: 2,
+      fact: "Once the rider is in the pocket of the wave, the wave's push replaces the rope — that's the magic of wake surfing!"
+    },
+    {
+      category: "Water Sports",
+      q: "Which governing body oversees professional wakeboarding competitions worldwide?",
+      opts: ["WWA (World Wake Association)", "USCG (US Coast Guard)", "FISA (World Rowing)", "NBA (National Boat Association)"],
+      ans: 0,
+      fact: "The WWA (World Wake Association) governs wakeboarding, wake surfing, and wakeskate competitions globally."
+    },
+    {
+      category: "Safety",
+      q: "What is the safest zone to stay clear of while a boat is moving?",
+      opts: ["Bow (front)", "Stern and propeller area", "Starboard side", "Port side"],
+      ans: 1,
+      fact: "The propeller spins at high RPM and causes serious injuries. Always stay clear of the stern area when the engine is running."
+    }
+  ];
+
+  /* ================================================
+     QUIZ STATE
+     ================================================ */
+  let currentQ   = 0;
+  let score      = 0;
+  let answered   = false;
+  let timerVal   = 15;
+  let timerInt   = null;
+  let userAnswers = [];
+
+  /* ================================================
+     HELPERS
+     ================================================ */
+  function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  function setProgress(n, total) {
+    document.getElementById('progress-bar').style.width = ((n / total) * 100) + '%';
+  }
+
+  /* ================================================
+     TIMER
+     ================================================ */
+  const TIMER_DURATION = 15;
+  const CIRCUMFERENCE  = 2 * Math.PI * 21; // ~132
+
+  function startTimer() {
+    timerVal = TIMER_DURATION;
+    clearInterval(timerInt);
+    updateTimerUI(timerVal);
+    timerInt = setInterval(() => {
+      timerVal--;
+      updateTimerUI(timerVal);
+      if (timerVal <= 0) {
+        clearInterval(timerInt);
+        autoExpire();
+      }
+    }, 1000);
+  }
+
+  function updateTimerUI(val) {
+    const arc  = document.getElementById('timer-arc');
+    const txt  = document.getElementById('timer-text');
+    const pct  = val / TIMER_DURATION;
+    arc.style.strokeDashoffset = CIRCUMFERENCE * (1 - pct);
+    txt.textContent = val;
+    arc.style.stroke = val > 5 ? 'var(--wave)' : 'var(--error)';
+  }
+
+  function autoExpire() {
+    if (!answered) {
+      answered = true;
+      userAnswers.push({ qIdx: currentQ, chosen: -1, correct: false });
+      revealAnswer(-1);
+      showFeedback(false, "Time's up! " + questions[currentQ].fact);
+      lockOptions();
+      showNextBtn();
+    }
+  }
+
+  function stopTimer() {
+    clearInterval(timerInt);
+  }
+
+  /* ================================================
+     QUIZ FLOW
+     ================================================ */
+  function startQuiz() {
+    currentQ    = 0;
+    score       = 0;
+    answered    = false;
+    userAnswers = [];
+    showScreen('question-screen');
+    loadQuestion(currentQ);
+  }
+
+  function loadQuestion(idx) {
+    const q = questions[idx];
+    answered = false;
+
+    document.getElementById('q-counter').textContent   = `Question ${idx + 1} of ${questions.length}`;
+    document.getElementById('q-category').textContent  = q.category;
+    document.getElementById('question-text').textContent = q.q;
+    document.getElementById('score-display').textContent = `Score: ${score} / ${idx}`;
+    setProgress(idx, questions.length);
+
+    // Reset buttons
+    const opts = document.querySelectorAll('.option-btn');
+    opts.forEach((btn, i) => {
+      btn.textContent  = q.opts[i];
+      btn.className    = 'option-btn';
+      btn.disabled     = false;
+    });
+
+    // Reset feedback
+    const fb = document.getElementById('feedback-banner');
+    fb.className = 'feedback-banner';
+    fb.textContent = '';
+    fb.style.display = 'none';
+
+    // Hide next btn
+    const nb = document.getElementById('next-btn');
+    nb.classList.remove('visible');
+
+    startTimer();
+  }
+
+  function selectAnswer(choiceIdx) {
+    if (answered) return;
+    answered = true;
+    stopTimer();
+
+    const correct = (choiceIdx === questions[currentQ].ans);
+    if (correct) score++;
+
+    userAnswers.push({ qIdx: currentQ, chosen: choiceIdx, correct });
+    revealAnswer(choiceIdx);
+    showFeedback(correct, questions[currentQ].fact);
+    lockOptions();
+    showNextBtn();
+  }
+
+  function revealAnswer(chosenIdx) {
+    const opts   = document.querySelectorAll('.option-btn');
+    const correct = questions[currentQ].ans;
+    opts.forEach((btn, i) => {
+      if (i === correct)   btn.classList.add('correct');
+      if (i === chosenIdx && i !== correct) btn.classList.add('wrong');
+    });
+  }
+
+  function lockOptions() {
+    document.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
+  }
+
+  function showFeedback(correct, fact) {
+    const fb = document.getElementById('feedback-banner');
+    fb.style.display = 'block';
+    fb.className = 'show ' + (correct ? 'correct-fb' : 'wrong-fb');
+    fb.innerHTML = (correct ? '✓ Correct! ' : '✗ Incorrect. ') + fact;
+  }
+
+  function showNextBtn() {
+    const nb = document.getElementById('next-btn');
+    nb.textContent = (currentQ < questions.length - 1) ? 'Next Question →' : 'See Results →';
+    nb.classList.add('visible');
+  }
+
+  function nextQuestion() {
+    currentQ++;
+    if (currentQ >= questions.length) {
+      showResults();
+    } else {
+      loadQuestion(currentQ);
+    }
+  }
+
+  /* ================================================
+     RESULTS
+     ================================================ */
+  function showResults() {
+    stopTimer();
+    setProgress(questions.length, questions.length);
+
+    showScreen('results-screen');
+
+    // Score circle
+    const pct = score / questions.length;
+    document.getElementById('score-circle').style.setProperty('--pct', (pct * 100).toFixed(1) + '%');
+    document.getElementById('final-score-num').textContent = `${score}/${questions.length}`;
+
+    // Grade message
+    let title, msg;
+    if (pct === 1)       { title = "Perfect Score! 🏆";   msg = "You're a true lake legend. Every question right — flawless!"; }
+    else if (pct >= 0.9) { title = "Lake Expert! ⚓";       msg = "Almost perfect. You clearly spend serious time on the water."; }
+    else if (pct >= 0.75){ title = "Solid Boater! 🛥";      msg = "Great score! You know your stuff — keep hitting the waves."; }
+    else if (pct >= 0.5) { title = "Weekend Warrior 🌊";    msg = "Decent foundation. A few more summers on the lake and you'll be a pro."; }
+    else                 { title = "Beginner's Waves 🐟";   msg = "Time for some practice! Study up and try again — everyone starts somewhere."; }
+
+    document.getElementById('result-title').textContent = title;
+    document.getElementById('grade-msg').textContent    = msg;
+
+    // Answer summary
+    const summary = document.getElementById('answer-summary');
+    summary.innerHTML = '';
+    userAnswers.forEach(({ qIdx, correct }) => {
+      const q   = questions[qIdx];
+      const row = document.createElement('div');
+      row.className = 'summary-row';
+      row.innerHTML = `
+        <div class="dot ${correct ? 'ok' : 'no'}">${correct ? '✓' : '✗'}</div>
+        <div>
+          <div class="q-text">${q.q}</div>
+          <div class="a-text">Answer: ${q.opts[q.ans]}</div>
+        </div>`;
+      summary.appendChild(row);
+    });
+  }
+</script>
+</body>
+</html>

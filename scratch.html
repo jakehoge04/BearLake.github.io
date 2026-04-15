@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Boating & Water Sports | Jake Hoge</title>
+  <!-- External custom stylesheet (requirement) -->
+  <link rel="stylesheet" href="scratch.css">
+</head>
+<body>
+
+<!-- ====================================================
+     STICKY NAVIGATION (back to professional pages)
+     ==================================================== -->
+<nav id="top-nav">
+  <a href="index.html">&#8592; Portfolio Home</a>
+  <a href="resume.html">Résumé</a>
+  <a href="#intro">About</a>
+  <a href="#sports">Water Sports</a>
+  <a href="#video">Watch</a>
+  <a href="#tableau">Data</a>
+  <a href="#gear">Gear</a>
+  <a href="app.html" class="app-nav">&#127918; Quiz App</a>
+</nav>
+
+<!-- ====================================================
+     DIV 1: PAGE HEADER
+     ==================================================== -->
+<div id="page-header">
+  <div class="header-inner">
+    <h1>Boating &amp; Water Sports</h1>
+    <div class="tagline">Wake Surfing &nbsp;·&nbsp; Water Skiing &nbsp;·&nbsp; Lake Life &nbsp;·&nbsp; Intermountain West</div>
+  </div>
+</div>
+
+<!-- ====================================================
+     DIV 2: MAIN CONTENT
+     ==================================================== -->
+<div id="main-content">
+
+  <!-- INTRO SECTION (on-page anchor target: #intro) -->
+  <div class="content-section" id="intro">
+    <h2>Life on the Water</h2>
+    <p>
+      There's nothing quite like cutting across glassy water at sunrise, the spray hitting your face, 
+      and a wave rising behind the boat just right for a surf. Water sports have been a huge part of my 
+      life — from growing up near Utah's lakes to working at The Boat Shack and Marine Products, where 
+      I learned the business of boating from the inside out.
+    </p>
+    <p>
+      The Intermountain West might seem like an unlikely home for water sports, but Utah's reservoirs — 
+      Lake Powell, Bear Lake, Jordanelle, and Utah Lake — are world-class venues for wake surfing, 
+      water skiing, and weekend cruising. Whether you're a first-timer or a seasoned pro, there's 
+      something for everyone out on the water.
+    </p>
+
+    <!-- IMAGE 1 (requirement: at least one image not from Bootstrap theme) -->
+    <div class="img-wrap">
+      <img
+        src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&fit=crop&q=80"
+        alt="Scenic mountain lake perfect for boating in the Intermountain West"
+        width="860">
+      <div class="img-caption">Utah's mountain reservoirs offer world-class boating and water sports conditions</div>
+    </div>
+  </div>
+
+  <!-- WATER SPORTS SECTION (anchor: #sports) -->
+  <div class="content-section" id="sports">
+    <h2>Popular Water Sports</h2>
+    <p>
+      Water sports range from relaxed tube rides to high-intensity wakeboarding competitions. 
+      Here's a breakdown of the most popular activities you can enjoy behind a boat, 
+      organized by skill level and intensity:
+    </p>
+
+    <!-- ================================================
+         NESTED LISTS (requirement):
+         Ordered list with unordered sub-lists inside
+         ================================================ -->
+    <ol class="main-list">
+      <li>
+        <strong>Wake Surfing</strong> &mdash; Surf the wave your boat creates — no rope needed!
+        <ul class="sub-list">
+          <li>Best with a surf-style ballast tank for a larger, cleaner wave</li>
+          <li>Ideal boat speed: 10–12 mph for most riders</li>
+          <li>Beginner-friendly with the right board size (5'0"–5'6")</li>
+          <li>My personal favorite — nothing beats a long surf session at sunset</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Water Skiing</strong> &mdash; The classic. Slalom or two skis, pure speed and carving.
+        <ul class="sub-list">
+          <li>Typical tow speeds: 26–36 mph depending on skier and course</li>
+          <li>Slalom skiing is a competitive sport at national and international levels</li>
+          <li>Builds excellent core strength and lower-body stability</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Wakeboarding</strong> &mdash; Think snowboarding on water — bindings, tricks, air.
+        <ul class="sub-list">
+          <li>Bindings lock your feet to the board for control and trick performance</li>
+          <li>Riders use the wake as a natural ramp to launch aerial tricks</li>
+          <li>Professional tours run worldwide (WWA, CWBA)</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Tubing</strong> &mdash; The most accessible and fun for all ages on the water.
+        <ul class="sub-list">
+          <li>Inflate, tow, and hold on — simple as that</li>
+          <li>Perfect for family lake days with no learning curve</li>
+          <li>Many styles: round, torpedo, banana, and deck tubes</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Kneeboarding</strong> &mdash; Great stepping stone toward wakeboarding.
+        <ul class="sub-list">
+          <li>Kneeling position provides stability, ideal for beginners</li>
+          <li>Easier to learn surface spins before transitioning to standing boards</li>
+          <li>Very popular with kids and teens just getting into board sports</li>
+        </ul>
+      </li>
+    </ol>
+
+    <!-- IMAGE 2 -->
+    <div class="img-wrap">
+      <img
+        src="https://images.unsplash.com/photo-1559599101-f09722fb4948?w=900&fit=crop&q=80"
+        alt="Wakeboarding on a lake — aerial trick off the wake"
+        width="860">
+      <div class="img-caption">Wakeboarding — one of the most dynamic and acrobatic water sports behind a boat</div>
+    </div>
+  </div>
+
+  <!-- VIDEO SECTION (anchor: #video) -->
+  <div class="content-section" id="video">
+    <h2>Watch: Wake Surfing in Action</h2>
+    <p>
+      Wake surfing has exploded in popularity across the Intermountain West. Watch the video below 
+      to see what it looks like when riders catch the perfect wave and start throwing tricks 
+      without the rope.
+    </p>
+
+    <!-- ================================================
+         EMBEDDED YOUTUBE VIDEO (requirement)
+         To change the video: replace "kRz8-EXfhFQ" in the
+         src URL with any YouTube video ID.
+         Find the ID in the video's URL:
+         youtube.com/watch?v=YOUR_ID_HERE
+         Note: YouTube embeds may not work on localhost —
+         they will work once hosted on GitHub Pages.
+         ================================================ -->
+    <div class="video-wrap">
+      <iframe
+        src="https://www.youtube.com/embed/kRz8-EXfhFQ"
+        title="Wake Surfing Highlights"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <p style="font-size:0.82rem; color:#999; text-align:center; margin-top:8px; font-family:Arial,sans-serif;">
+      &#9888; YouTube embeds require online hosting — works on GitHub Pages, not locally.
+      Replace the video ID in scratch.html if desired.
+    </p>
+  </div>
+
+  <!-- TABLEAU SECTION (anchor: #tableau) -->
+  <!-- ================================================
+       LIVE TABLEAU EMBED (requirement)
+       Steps to replace with your own viz:
+       1. Go to https://public.tableau.com
+       2. Find a viz you like (search "boating", "water sports", 
+          "outdoor recreation", or anything interesting)
+       3. Click the viz → Share → Embed Code
+       4. Copy the entire <div> + <script> block
+       5. Replace the block below with your copied code
+       ================================================ -->
+  <div id="tableau-section" id="tableau">
+    <h2>&#128202; Water Recreation Data</h2>
+    <p>
+      The US recreational boating industry represents billions in economic activity each year. 
+      Explore the interactive visualization below — powered by Tableau Public — to see trends 
+      in outdoor water recreation across the country.
+    </p>
+
+    <!-- TABLEAU EMBED: Replace this entire block with your chosen viz's embed code -->
+    <div class='tableauPlaceholder' id='viz1685000000' style='position:relative; min-height:520px;'>
+      <noscript>
+        <a href='https://public.tableau.com'>
+          <img alt='Dashboard'
+               src='https://public.tableau.com/static/images/US/USOutdoorRecreation/Dashboard/1_rss.png'
+               style='border:none' />
+        </a>
+      </noscript>
+      <object class='tableauViz' style='display:none;'>
+        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+        <param name='embed_code_version' value='3' />
+        <param name='site_root' value='' />
+        <!-- REPLACE the value below with your viz's Workbook/SheetName path -->
+        <param name='name' value='USOutdoorRecreation/Dashboard' />
+        <param name='tabs' value='no' />
+        <param name='toolbar' value='yes' />
+        <param name='animate_transition' value='yes' />
+        <param name='display_static_image' value='yes' />
+        <param name='display_spinner' value='yes' />
+        <param name='display_overlay' value='yes' />
+        <param name='display_count' value='yes' />
+        <param name='language' value='en-US' />
+      </object>
+    </div>
+    <script type='text/javascript'>
+      var divElement = document.getElementById('viz1685000000');
+      var vizElement = divElement.getElementsByTagName('object')[0];
+      vizElement.style.width = '100%';
+      vizElement.style.height = Math.max(500, Math.round(divElement.offsetWidth * 0.65)) + 'px';
+      var scriptElement = document.createElement('script');
+      scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+      vizElement.parentNode.insertBefore(scriptElement, vizElement);
+    </script>
+    <!-- END TABLEAU EMBED -->
+
+    <p style="font-size:0.82rem; color:#999; margin-top:12px; font-family:Arial,sans-serif;">
+      Powered by Tableau Public. Replace this embed with your chosen visualization.
+    </p>
+  </div>
+
+  <!-- GEAR GUIDE (anchor: #gear) -->
+  <div class="content-section" id="gear">
+    <h2>Essential Gear Guide</h2>
+    <p>
+      Having the right gear makes all the difference between a great day on the water and 
+      a frustrating one. Here's what every boater and water sports enthusiast should know:
+    </p>
+
+    <h3>Life Jackets (PFDs)</h3>
+    <p>
+      A properly-fitted, Coast Guard-approved Personal Flotation Device is non-negotiable — 
+      legally required in most states and genuinely lifesaving. Type III vests are most popular 
+      for recreational water sports because they allow full arm movement while skiing or surfing.
+    </p>
+
+    <h3>Ropes &amp; Handles</h3>
+    <p>
+      Wake surf ropes are shorter (20–25 ft) and stiffer. Slalom ski ropes can extend up to 
+      75 ft. Look for low-stretch material for maximum feedback and control.
+    </p>
+
+    <h3>Boards &amp; Skis</h3>
+    <p>
+      Longer, wider boards are more stable for beginners. Wake surf boards typically range from 
+      4'6" to 5'6" — match board size to rider weight. For slalom skis, consult manufacturer 
+      sizing charts based on your weight and preferred speed.
+    </p>
+
+    <h3>Safety Gear</h3>
+    <p>
+      Always carry a throw rope, whistle, and fire extinguisher. Make sure your boat's registration 
+      is current, navigation lights are functional, and you carry the required number of PFDs for 
+      all passengers onboard.
+    </p>
+
+    <!-- IMAGE 3 -->
+    <div class="img-wrap">
+      <img
+        src="https://images.unsplash.com/photo-1530549387789-4c1017266635?w=900&fit=crop&q=80"
+        alt="Boat safety gear including life jackets and equipment"
+        width="860">
+      <div class="img-caption">Proper safety gear is required by law — and it saves lives</div>
+    </div>
+
+    <!-- ON-PAGE ANCHOR link (requirement: on-page anchor) -->
+    <p style="text-align:center; margin-top:20px;">
+      <a href="#intro" style="color:#1565a0; font-family:Arial,sans-serif; font-size:0.9rem;">
+        &#8593; Back to Top
+      </a>
+    </p>
+  </div>
+
+  <!-- QUIZ APP LINK -->
+  <div class="content-section" style="text-align:center; border-left-color:#c8a951;">
+    <h2>Think You Know Water Sports?</h2>
+    <p>
+      Test your boating knowledge with the ultimate Boat &amp; Water Sports Quiz!
+      12 questions across safety, technique, gear, and lake trivia.
+    </p>
+    <br>
+    <a href="app.html" class="app-btn">&#128676; Take the Quiz</a>
+    <br><br>
+    <p style="font-size:0.85rem; color:#999; font-family:Arial,sans-serif;">
+      Built with AI collaboration &mdash; a single-page interactive web app
+    </p>
+  </div>
+
+</div><!-- end #main-content -->
+
+<!-- ====================================================
+     DIV 3: PAGE FOOTER
+     ==================================================== -->
+<div id="page-footer">
+  <p>Jake Hoge &mdash; Boating &amp; Water Sports &mdash; Scratch Page</p>
+  <p>
+    <a href="index.html">&#8592; Portfolio Home</a>
+    &nbsp;&nbsp;|&nbsp;&nbsp;
+    <a href="resume.html">Résumé</a>
+    &nbsp;&nbsp;|&nbsp;&nbsp;
+    <a href="app.html">Quiz App</a>
+  </p>
+  <p style="margin-top:10px; font-size:0.78rem; opacity:0.6;">
+    Built from scratch — no Bootstrap used on this page
+  </p>
+</div>
+
+</body>
+</html>

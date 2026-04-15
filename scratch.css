@@ -1,0 +1,315 @@
+/* =========================================================
+   scratch.css — Custom Stylesheet for Boating & Water Sports Page
+   Jake Hoge | From-Scratch Page (No Bootstrap)
+   Requirements met:
+     ✓ 4+ style definitions
+     ✓ Font color styles
+     ✓ Font family styles
+     ✓ 3+ divs for layout (#page-header, #main-content, #page-footer)
+   ========================================================= */
+
+/* ----- RESET & BASE ----- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* STYLE 1: Body — background color + base font */
+body {
+  font-family: 'Georgia', serif;           /* font-family */
+  color: #1a2a3a;                          /* font-color */
+  background-color: #ddeef8;              /* custom background color (requirement) */
+  background-image:
+    radial-gradient(ellipse at 15% 0%, rgba(79,195,247,0.30) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 100%, rgba(13,59,94,0.18) 0%, transparent 55%);
+  min-height: 100vh;
+}
+
+/* ----- DIV 1: PAGE HEADER ----- */
+#page-header {
+  background: linear-gradient(150deg, #0d3b5e 0%, #1565a0 50%, #1976d2 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative wave at bottom of header */
+#page-header::after {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 55px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 55'%3E%3Cpath fill='%23ddeef8' d='M0,55 C200,10 400,45 600,20 C800,0 1000,40 1200,18 C1320,6 1390,30 1440,22 L1440,55Z'/%3E%3C/svg%3E") center bottom / cover no-repeat;
+}
+
+.header-inner {
+  padding: 65px 30px 85px;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* STYLE 2: Header heading — large white serif title */
+#page-header h1 {
+  font-family: 'Georgia', serif;           /* font-family */
+  font-size: 3.4rem;
+  color: #ffffff;                          /* font-color */
+  text-shadow: 0 2px 12px rgba(0,0,0,0.35);
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+  line-height: 1.2;
+}
+
+#page-header .tagline {
+  font-family: 'Arial', sans-serif;        /* font-family */
+  font-size: 1rem;
+  color: #f4e4b4;                          /* font-color — sandy gold */
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* ----- STICKY NAV ----- */
+#top-nav {
+  background: rgba(13, 59, 94, 0.96);
+  padding: 11px 20px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px 22px;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid rgba(200,169,81,0.3);
+}
+
+/* STYLE 3: Navigation links */
+#top-nav a {
+  font-family: 'Arial', sans-serif;        /* font-family */
+  color: #f4e4b4;                          /* font-color */
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 5px 8px;
+  border-radius: 4px;
+  transition: color 0.2s, background 0.2s;
+}
+
+#top-nav a:hover {
+  color: #ffffff;                          /* font-color */
+  background: rgba(255,255,255,0.10);
+}
+
+#top-nav a.app-nav {
+  background: rgba(200,169,81,0.20);
+  border: 1px solid rgba(200,169,81,0.4);
+  color: #f4e4b4;                          /* font-color */
+}
+
+#top-nav a.app-nav:hover {
+  background: rgba(200,169,81,0.35);
+  color: #fff;
+}
+
+/* ----- DIV 2: MAIN CONTENT ----- */
+#main-content {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 44px 20px 20px;
+}
+
+/* ----- CONTENT SECTIONS ----- */
+.content-section {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 38px 42px;
+  margin-bottom: 36px;
+  box-shadow: 0 3px 18px rgba(13,59,94,0.09);
+  border-left: 5px solid #4fc3f7;
+}
+
+/* STYLE 4: Section headings */
+.content-section h2 {
+  font-family: 'Georgia', serif;           /* font-family */
+  color: #0d3b5e;                          /* font-color */
+  font-size: 1.75rem;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #c8a951;
+  margin-bottom: 18px;
+}
+
+.content-section h3 {
+  font-family: 'Georgia', serif;           /* font-family */
+  color: #1565a0;                          /* font-color */
+  font-size: 1.15rem;
+  margin: 22px 0 8px;
+}
+
+.content-section p {
+  font-family: 'Georgia', serif;           /* font-family */
+  color: #333;                             /* font-color */
+  line-height: 1.85;
+  margin-bottom: 14px;
+  font-size: 1rem;
+}
+
+/* ----- LISTS (nested list requirement) ----- */
+ol.main-list {
+  font-family: 'Georgia', serif;           /* font-family */
+  color: #1a2a3a;                          /* font-color */
+  padding-left: 22px;
+  line-height: 1.9;
+  margin-bottom: 14px;
+}
+
+ol.main-list > li {
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+/* Nested unordered list */
+ul.sub-list {
+  list-style: disc;
+  padding-left: 20px;
+  margin: 6px 0 4px;
+  font-family: 'Arial', sans-serif;        /* font-family — different from parent */
+  font-size: 0.92rem;
+  color: #1565a0;                          /* font-color */
+  line-height: 1.7;
+}
+
+ul.sub-list li {
+  margin-bottom: 3px;
+}
+
+/* ----- IMAGES ----- */
+.img-wrap {
+  text-align: center;
+  margin: 24px 0;
+}
+
+.img-wrap img {
+  max-width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 6px 22px rgba(0,0,0,0.14);
+  display: block;
+  margin: 0 auto;
+}
+
+.img-caption {
+  font-family: 'Arial', sans-serif;        /* font-family */
+  color: #666;                             /* font-color */
+  font-size: 0.84rem;
+  margin-top: 9px;
+  font-style: italic;
+}
+
+/* ----- VIDEO EMBED ----- */
+.video-wrap {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 6px 22px rgba(0,0,0,0.14);
+  margin: 20px 0;
+}
+
+.video-wrap iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border: 0;
+}
+
+/* ----- TABLEAU SECTION ----- */
+#tableau-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 38px 42px;
+  margin-bottom: 36px;
+  box-shadow: 0 3px 18px rgba(13,59,94,0.09);
+  border-left: 5px solid #c8a951;
+}
+
+#tableau-section h2 {
+  font-family: 'Georgia', serif;           /* font-family */
+  color: #0d3b5e;                          /* font-color */
+  font-size: 1.75rem;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #c8a951;
+  margin-bottom: 18px;
+}
+
+#tableau-section p {
+  font-family: 'Georgia', serif;
+  color: #444;                             /* font-color */
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+/* ----- APP BUTTON ----- */
+.app-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #1565a0, #0d3b5e);
+  color: #ffffff;                          /* font-color */
+  font-family: 'Arial', sans-serif;        /* font-family */
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 15px 36px;
+  border-radius: 8px;
+  letter-spacing: 1px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 16px rgba(13,59,94,0.28);
+}
+
+.app-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(13,59,94,0.38);
+  color: #f4e4b4;
+}
+
+/* ----- ANCHOR HIGHLIGHT ----- */
+:target {
+  outline: 3px solid rgba(79,195,247,0.6);
+  border-radius: 10px;
+}
+
+/* ----- DIV 3: PAGE FOOTER ----- */
+#page-footer {
+  background: #0d3b5e;
+  font-family: 'Arial', sans-serif;        /* font-family */
+  color: rgba(255,255,255,0.6);            /* font-color */
+  text-align: center;
+  padding: 32px 20px;
+}
+
+#page-footer p {
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+}
+
+#page-footer a {
+  color: #f4e4b4;                          /* font-color */
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+#page-footer a:hover {
+  color: #ffffff;
+}
+
+/* ----- RESPONSIVE ----- */
+@media (max-width: 640px) {
+  #page-header h1 { font-size: 2.1rem; }
+  .content-section { padding: 24px 20px; }
+  #tableau-section { padding: 24px 20px; }
+  #main-content { padding: 24px 12px 12px; }
+}

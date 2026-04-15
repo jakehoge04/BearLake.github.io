@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jake Hoge | Résumé</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1b2a4a;
+      --gold: #c8a951;
+      --gold-light: #e8d08a;
+      --bg-light: #f7f8fc;
+    }
+    body { font-family: 'Lato', sans-serif; background: var(--bg-light); }
+
+    /* NAVBAR */
+    .navbar { background: var(--navy) !important; padding: 14px 0; }
+    .navbar-brand { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #fff !important; }
+    .nav-link { color: rgba(255,255,255,0.82) !important; font-weight: 500; letter-spacing: 0.4px; transition: color 0.2s; }
+    .nav-link:hover, .nav-link.active { color: var(--gold) !important; }
+
+    /* RESUME HEADER */
+    .resume-header {
+      background: linear-gradient(135deg, #1b2a4a 0%, #2a4080 100%);
+      padding: 55px 0 50px;
+      color: #fff;
+    }
+    .resume-header h1 { font-family: 'Playfair Display', serif; font-size: 2.8rem; }
+    .resume-header .subtitle { color: var(--gold); letter-spacing: 2.5px; text-transform: uppercase; font-size: 0.85rem; font-weight: 700; }
+
+    /* RESUME CARD */
+    .r-card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 14px rgba(27,42,74,0.07);
+      padding: 32px 36px;
+      margin-bottom: 22px;
+    }
+
+    /* SECTION HEADINGS */
+    .r-heading {
+      font-family: 'Playfair Display', serif;
+      color: var(--navy);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      border-bottom: 2px solid var(--gold);
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+    }
+
+    /* JOB ENTRIES */
+    .job-title { font-weight: 700; color: var(--navy); font-size: 1.02rem; }
+    .company-name { color: var(--gold); font-weight: 600; }
+    .date-loc { color: #999; font-size: 0.85rem; }
+
+    /* BULLETS */
+    .r-bullet { position: relative; padding-left: 18px; color: #444; font-size: 0.94rem; margin-bottom: 5px; line-height: 1.55; }
+    .r-bullet::before { content: '▸'; position: absolute; left: 0; color: var(--gold); font-size: 0.8rem; top: 2px; }
+
+    /* SKILL TAGS */
+    .skill-tag {
+      display: inline-block;
+      background: rgba(200,169,81,0.12);
+      color: var(--navy);
+      border: 1px solid rgba(200,169,81,0.35);
+      border-radius: 20px;
+      padding: 4px 13px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      margin: 3px;
+    }
+
+    /* FOOTER */
+    footer { background: var(--navy); color: #8a9dc0; padding: 35px 0; }
+    footer a { color: var(--gold); text-decoration: none; }
+    .social-link { font-size: 1.4rem; color: #8a9dc0; margin: 0 8px; transition: color 0.2s; display: inline-block; }
+    .social-link:hover { color: var(--gold); }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">Jake Hoge</a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+      <i class="bi bi-list text-white fs-3"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navmenu">
+      <ul class="navbar-nav ms-auto gap-1">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" href="resume.html">Résumé</a></li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://www.linkedin.com/in/jake-hoge" target="_blank">
+            <i class="bi bi-linkedin me-1"></i>LinkedIn
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- RESUME HEADER -->
+<div class="resume-header text-center">
+  <div class="container">
+    <div class="subtitle mb-2">BYU Marriott School of Business &nbsp;·&nbsp; Business Strategy</div>
+    <h1 class="mb-2">Jake Hoge</h1>
+    <p class="mb-0" style="color:rgba(255,255,255,0.65);">GPA 3.42 &nbsp;·&nbsp; Provo, Utah &nbsp;·&nbsp; Class of 2028</p>
+  </div>
+</div>
+
+<!-- RESUME BODY -->
+<div class="container py-5">
+  <div class="row g-4">
+
+    <!-- LEFT: Main Content -->
+    <div class="col-lg-8">
+
+      <!-- EDUCATION -->
+      <div class="r-card">
+        <div class="r-heading">Education</div>
+        <div class="d-flex justify-content-between flex-wrap gap-2">
+          <div>
+            <div class="job-title">Brigham Young University &ndash; Marriott School of Business</div>
+            <div>Bachelor of Science in Business Strategy</div>
+          </div>
+          <div class="text-end">
+            <div class="date-loc">Provo, UT</div>
+            <div class="date-loc">Expected Apr 2028</div>
+          </div>
+        </div>
+        <div class="mt-3">
+          <div class="r-bullet">GPA: 3.42 / 4.00</div>
+          <div class="r-bullet">Member, Private Equity and Venture Capital Association</div>
+          <div class="r-bullet">Member, Corporate Finance and Advisory Association</div>
+        </div>
+      </div>
+
+      <!-- EXPERIENCE -->
+      <div class="r-card">
+        <div class="r-heading">Work Experience</div>
+
+        <!-- Try Closer -->
+        <div class="mb-4">
+          <div class="d-flex justify-content-between flex-wrap gap-1">
+            <div>
+              <span class="job-title">Executive Assistant / Client Success Manager</span>
+              <span class="ms-2 company-name">Try Closer</span>
+            </div>
+            <div class="date-loc">Jul 2025 – Nov 2025 &nbsp;·&nbsp; Vineyard, UT</div>
+          </div>
+          <div class="mt-2">
+            <div class="r-bullet">Contributed to revenue growth from $10K to ~$50K in 3 months by consulting with the CEO to improve client execution strategies</div>
+            <div class="r-bullet">Leveraged and trained AI tools daily through prompt engineering to maximize team efficiency and deliver tailored client training</div>
+            <div class="r-bullet">Acted as primary liaison between sales representatives and clients, driving performance and retention</div>
+          </div>
+        </div>
+
+        <!-- The Boat Shack -->
+        <div class="mb-4">
+          <div class="d-flex justify-content-between flex-wrap gap-1">
+            <div>
+              <span class="job-title">Lot Tech / Sales</span>
+              <span class="ms-2 company-name">The Boat Shack</span>
+            </div>
+            <div class="date-loc">Apr 2025 – Aug 2025 &nbsp;·&nbsp; Lindon, UT</div>
+          </div>
+          <div class="mt-2">
+            <div class="r-bullet">Maintained operational readiness by organizing lot inventory, detailing boats, and preparing vessels for client delivery</div>
+            <div class="r-bullet">Coordinated logistics by towing boats and trailers to lakes and client sites, ensuring safe transport and on-time testing</div>
+            <div class="r-bullet">Performed pre-delivery inspections and water testing, verifying mechanical performance and customer specifications</div>
+          </div>
+        </div>
+
+        <!-- Marine Products -->
+        <div>
+          <div class="d-flex justify-content-between flex-wrap gap-1">
+            <div>
+              <span class="job-title">Pro Shop Specialist</span>
+              <span class="ms-2 company-name">Marine Products</span>
+            </div>
+            <div class="date-loc">Mar 2022 – Sep 2022 &nbsp;·&nbsp; Salt Lake City, UT</div>
+          </div>
+          <div class="mt-2">
+            <div class="r-bullet">Generated $70K in monthly sales during peak season through consultative selling and relationship management</div>
+            <div class="r-bullet">Developed deep product knowledge to support daily customer interactions, improving satisfaction and conversion rates</div>
+            <div class="r-bullet">Earned performance-based commission by consistently exceeding sales targets</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LEADERSHIP -->
+      <div class="r-card">
+        <div class="r-heading">Leadership &amp; Service</div>
+        <div class="d-flex justify-content-between flex-wrap gap-1">
+          <div>
+            <span class="job-title">Volunteer Representative</span>
+            <span class="ms-2 company-name">The Church of Jesus Christ of Latter-Day Saints</span>
+          </div>
+          <div class="date-loc">Feb 2023 – Feb 2025 &nbsp;·&nbsp; Houston, TX</div>
+        </div>
+        <div class="mt-2">
+          <div class="r-bullet">Developed leadership and problem-solving skills while mentoring teams and achieving measurable engagement outcomes</div>
+          <div class="r-bullet">Led and trained missionaries, helping new leaders build skills in communication, planning, and goal achievement</div>
+          <div class="r-bullet">Provided community service, spiritual direction, and personal mentorship to a diversity of individuals and families</div>
+          <div class="r-bullet">Self-taught Spanish through hands-on community outreach, achieving basic conversational proficiency</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: Sidebar -->
+    <div class="col-lg-4">
+
+      <!-- SKILLS -->
+      <div class="r-card">
+        <div class="r-heading">Skills</div>
+
+        <p class="text-muted small fw-semibold mb-2 text-uppercase" style="letter-spacing:1px;">Business &amp; Strategy</p>
+        <span class="skill-tag">Financial Analysis</span>
+        <span class="skill-tag">Sales Strategy</span>
+        <span class="skill-tag">Client Success</span>
+        <span class="skill-tag">Consulting</span>
+        <span class="skill-tag">Market Research</span>
+
+        <hr class="my-3">
+        <p class="text-muted small fw-semibold mb-2 text-uppercase" style="letter-spacing:1px;">Technology</p>
+        <span class="skill-tag">Prompt Engineering</span>
+        <span class="skill-tag">AI Tools</span>
+        <span class="skill-tag">Microsoft Office</span>
+
+        <hr class="my-3">
+        <p class="text-muted small fw-semibold mb-2 text-uppercase" style="letter-spacing:1px;">Leadership</p>
+        <span class="skill-tag">Team Mentorship</span>
+        <span class="skill-tag">Communication</span>
+        <span class="skill-tag">Goal Setting</span>
+        <span class="skill-tag">Spanish (Basic)</span>
+      </div>
+
+      <!-- AWARDS -->
+      <div class="r-card">
+        <div class="r-heading">Awards &amp; Honors</div>
+        <div class="r-bullet">Varsity Lacrosse – Two-Year Team Captain</div>
+        <div class="r-bullet">Four-Year Varsity Letterman</div>
+        <div class="r-bullet">First Team All-Region honoree</div>
+        <div class="r-bullet">All-Academic Team honoree</div>
+      </div>
+
+      <!-- INTERESTS -->
+      <div class="r-card">
+        <div class="r-heading">Interests</div>
+        <div class="r-bullet">Wake surfing &amp; water skiing</div>
+        <div class="r-bullet">Boating across the Intermountain West</div>
+        <div class="r-bullet">BYU Cougars Football</div>
+        <div class="r-bullet">San Francisco 49ers</div>
+        <div class="r-bullet">Oakland Athletics</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container text-center">
+    <p class="mb-2" style="color:#fff; font-family:'Playfair Display',serif; font-size:1.15rem;">Jake Hoge</p>
+    <div class="mb-3">
+      <a href="https://www.linkedin.com/in/jake-hoge" class="social-link" target="_blank"><i class="bi bi-linkedin"></i></a>
+      <a href="mailto:spamstinks@spam.com" class="social-link"><i class="bi bi-envelope-fill"></i></a>
+    </div>
+    <p class="mb-0 small">BYU Marriott School of Business &nbsp;·&nbsp; Business Strategy &nbsp;·&nbsp; Class of 2028</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
